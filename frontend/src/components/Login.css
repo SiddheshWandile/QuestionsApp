@@ -1,0 +1,39 @@
+body{
+    background-image: url("https://img.freepik.com/free-photo/two-monastera-leaves-black-background_23-2147835077.jpg?t=st=1723201876~exp=1723205476~hmac=75ce931664a0d418b1e88f8afbd0fa456e44bd6d4db2f10fb2755d87801fc7dd&w=1060");
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+.form {
+    height: auto;
+    max-width: 500px;
+    padding: 20px;
+    margin: 80px auto;
+    border: 1px solid #af8b8b;
+    border-radius: 50px;
+    background-color: #a0a2c7c6;
+}
+
+.view{
+    padding: 20px;
+}
+
+.error{
+    background-color: none;
+    text-align: center;
+    color: rgb(243, 238, 238);
+}
+  
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+.btn-primary {
+  width: 100%;
+}
+  
