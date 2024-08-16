@@ -6,6 +6,7 @@ const Questions = () => {
   const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [sourceCode, setSourceCode] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const questions = [
     { id: 1, text: "Binary Search Algorithm" },
@@ -20,23 +21,33 @@ const Questions = () => {
       setError("Please select a question.");
       return;
     }
-  
+
+    setLoading(true);
+
     try {
       const response = await axios.post("http://127.0.0.1:5000/api/question", {
-        question_no: selectedQuestion.id,         
+        question_no: selectedQuestion.id,
       });
-      console.log(selectedQuestion.id);
-  
-      setSourceCode(response.data.source_code);  
+
+      setSourceCode(response.data.source_code);
       setError("");
     } catch (err) {
       setError("An error occurred while fetching the source code.");
+    } finally {
+      setLoading(false);
     }
   };
-  
+
+  const Logout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
 
   return (
     <div className="container mt-5">
+      <button type="button" className="logout btn btn-danger" onClick={Logout}>
+        Logout
+      </button>
       <div className="row justify-content-center">
         <div className="col-md-8 form">
           <div className="view">
@@ -46,7 +57,9 @@ const Questions = () => {
               {questions.map((question) => (
                 <li
                   key={question.id}
-                  className={`list-group-item ${selectedQuestion?.id === question.id ? "active" : ""}`}
+                  className={`list-group-item ${
+                    selectedQuestion?.id === question.id ? "active" : ""
+                  }`}
                   onClick={() => setSelectedQuestion(question)}
                 >
                   {question.text}
@@ -57,8 +70,9 @@ const Questions = () => {
               type="button"
               className="btn btn-primary mt-3"
               onClick={handleSubmit}
+              disabled={loading}
             >
-              Submit
+              {loading ? "Loading..." : "Submit"}
             </button>
             {sourceCode && (
               <div className="mt-4">

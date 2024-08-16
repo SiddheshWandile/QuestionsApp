@@ -1,5 +1,5 @@
 body{
-    background-image: url("https://img.freepik.com/free-photo/two-monastera-leaves-black-background_23-2147835077.jpg?t=st=1723201876~exp=1723205476~hmac=75ce931664a0d418b1e88f8afbd0fa456e44bd6d4db2f10fb2755d87801fc7dd&w=1060");
+    background-color: rgba(0, 0, 0, 0.93);
     background-position: center; 
     background-repeat: no-repeat;
     background-size: cover; 
@@ -37,3 +37,11 @@ h2 {
   width: 100%;
 }
   
+.logout{
+  color: white;
+  background-color: #af8b8b;
+}
+
+.logout:hover{
+  background-color: rgb(163, 52, 52);
+}
