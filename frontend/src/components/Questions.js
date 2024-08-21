@@ -45,7 +45,7 @@ const Questions = () => {
 
   return (
     <div className="container mt-5">
-      <button type="button" className="logout btn btn-danger" onClick={Logout}>
+      <button type="button" className="btn btn-danger" onClick={Logout}>
         Logout
       </button>
       <div className="row justify-content-center">

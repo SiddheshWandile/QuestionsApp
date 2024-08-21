@@ -26,11 +26,18 @@ def init_db(app):
         cursor.execute("USE user_auth")
 
         cursor.execute("""
-        CREATE TABLE IF NOT EXISTS Login (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            username VARCHAR(50) NOT NULL UNIQUE,
-            password VARCHAR(100) NOT NULL
-        )
+            CREATE TABLE IF NOT EXISTS Login (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(50) NOT NULL UNIQUE,
+                password VARCHAR(100) NOT NULL,
+                first_name VARCHAR(50) NOT NULL,
+                last_name VARCHAR(50) NOT NULL,
+                age INT NOT NULL,
+                gender ENUM('Male', 'Female', 'Other') NOT NULL,
+                mobile_no VARCHAR(15) NOT NULL,
+                city VARCHAR(100) NOT NULL,
+                country VARCHAR(100) NOT NULL
+            )
         """)
 
         cursor.execute("""
@@ -65,28 +72,37 @@ def init_db(app):
     except pymysql.Error as e:
         print(f"Error while connecting to MySQL: {e}")
 
-def register_user(username, password):
+def register_user(username, password, first_name, last_name, age, gender, mobile_no, city, country):
     try:
         cursor = mysql.connection.cursor()
+        print("Database cursor created.")
 
         cursor.execute("SELECT * FROM Login WHERE username = %s", (username,))
         existing_user = cursor.fetchone()
+        print("Checked for existing user.")
 
         if existing_user:
-            print("Username already exists. Registration failed.")
+            print("Username already exists.")
             return False
 
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        print("Password hashed.")
 
-        cursor.execute("INSERT INTO Login (username, password) VALUES (%s, %s)", (username, hashed_password.decode('utf-8')))
+        cursor.execute("""
+            INSERT INTO Login (username, password, first_name, last_name, age, gender, mobile_no, city, country)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (username, hashed_password.decode('utf-8'), first_name, last_name, age, gender, mobile_no, city, country))
+        
         mysql.connection.commit()
         cursor.close()
+        print("User registered successfully.")
 
         return True
 
     except Exception as e:
         print(f"Error during user registration: {e}")
         return False
+
 
 def validate_login(username, password):
     cursor = mysql.connection.cursor()

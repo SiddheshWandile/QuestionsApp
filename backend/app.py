@@ -10,13 +10,21 @@ init_db(app)
 @app.route('/api/signup', methods=['POST'])
 def signup():
     data = request.json
+
     username = data.get('username')
     password = data.get('password')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
+    age = data.get('age')
+    gender = data.get('gender')
+    mobile_no = data.get('mobile_no')
+    city = data.get('city')
+    country = data.get('country')
 
-    if not username or not password:
-        return jsonify({"error": "Username and password are required"}), 400
+    if not all([username, password, first_name, last_name, age, gender, mobile_no, city, country]):
+        return jsonify({"error": "All fields are required"}), 400
 
-    if register_user(username, password):
+    if register_user(username, password, first_name, last_name, age, gender, mobile_no, city, country):
         return jsonify({"message": "User registered successfully"}), 201
     else:
         return jsonify({"error": "User registration failed"}), 500

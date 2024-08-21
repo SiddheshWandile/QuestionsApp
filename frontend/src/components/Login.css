@@ -1,5 +1,5 @@
 body{
-    background-color: rgba(0, 0, 0, 0.93);
+    background-image: url('https://img.freepik.com/free-vector/dark-gradient-background-with-copy-space_53876-99548.jpg?w=996&t=st=1724043020~exp=1724043620~hmac=8fc892dfccf86530cd6c4d3e17f708ac8caf8665dfb1f436d6f4c6d418fd7034');
     background-position: center; 
     background-repeat: no-repeat;
     background-size: cover; 
@@ -35,13 +35,4 @@ h2 {
 
 .btn-primary {
   width: 100%;
-}
-  
-.logout{
-  color: white;
-  background-color: #af8b8b;
-}
-
-.logout:hover{
-  background-color: rgb(163, 52, 52);
 }
